@@ -10,10 +10,10 @@ export default function ImageDropzone({ setImages }) {
     <div {...getRootProps()} className={`dropzone ${isDragActive ? 'dropzone-active' : ''}`}>
       <input {...getInputProps()} />
       
-      <span className="dropzone-icon">📸</span>
+      <span className="dropzone-icon">📂</span>
       
       <span className="dropzone-text">
-        {isDragActive ? "Déposez les images ici" : "Ajouter des photos"}
+        {isDragActive ? "Déposez les images ici" : "Importer des photos"}
       </span>
 
       <span className="dropzone-subtext">

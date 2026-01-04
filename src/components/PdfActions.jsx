@@ -1,65 +1,34 @@
-export default function PdfActions({ pdf }) {
-  const isMobile = /Mobi|Android|iPhone|iPad/i.test(navigator.userAgent);
+import { useState } from "react";
+import PdfViewer from "./PdfViewer";
 
-  const pdfUrl = URL.createObjectURL(pdf);
+export default function PdfActions({ pdf, pdfName }) {
+  const [showViewer, setShowViewer] = useState(false);
 
-  const handleOpen = () => {
-    window.open(pdfUrl, "_blank", "noopener,noreferrer");
-  };
-
-  const handleDownload = () => {
-    const link = document.createElement("a");
-    link.href = pdfUrl;
-    link.download = `photos-${Date.now()}.pdf`;
-    document.body.appendChild(link);
-    link.click();
-    document.body.removeChild(link);
-
-    setTimeout(() => URL.revokeObjectURL(pdfUrl), 1000);
-  };
-
-  const handleShare = async () => {
-    if (!navigator.share) return;
-
-    try {
-      const file = new File(
-        [pdf],
-        `photos-${Date.now()}.pdf`,
-        { type: "application/pdf" }
-      );
-
-      await navigator.share({
-        files: [file],
-        title: "Photos → PDF",
-      });
-    } catch (err) {
-      console.log("Partage annulé ou non supporté");
-    }
+  // Générer le nom de fichier final
+  const getFileName = () => {
+    const name = pdfName?.trim() || "photos";
+    // Nettoyer le nom (enlever caractères spéciaux)
+    const cleanName = name.replace(/[^a-zA-Z0-9àâäéèêëïîôùûüç\s\-_]/g, "").trim();
+    return `${cleanName || "photos"}.pdf`;
   };
 
   return (
-    <div className="pdf-actions">
-      {/* 📱 MOBILE : un seul bouton */}
-      {isMobile && (
-        <button className="primary" onClick={handleOpen}>
-          📄 Ouvrir le PDF
+    <>
+      {/* Bouton pour ouvrir le viewer */}
+      <div className="pdf-actions-container">
+        <button className="primary large" onClick={() => setShowViewer(true)}>
+          📖 Ouvrir le PDF
         </button>
-      )}
+      </div>
 
-      {/* 🖥 DESKTOP */}
-      {!isMobile && (
-        <>
-          <button className="primary" onClick={handleDownload}>
-            💾 Télécharger le PDF
-          </button>
-
-          {navigator.share && (
-            <button className="success" onClick={handleShare}>
-              📤 Partager
-            </button>
-          )}
-        </>
+      {/* Viewer plein écran */}
+      {showViewer && (
+        <PdfViewer
+          pdf={pdf}
+          fileName={getFileName()}
+          onClose={() => setShowViewer(false)}
+        />
       )}
-    </div>
+    </>
   );
 }

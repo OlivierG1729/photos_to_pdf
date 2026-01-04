@@ -1,88 +1,40 @@
 # 📸 Photos → PDF
 
-Application web simple et rapide permettant de convertir plusieurs images (JPG, PNG) en un **PDF propre**, directement depuis le navigateur.
-
-👉 Fonctionne sur **PC et smartphone**  
-👉 Aucune donnée n’est stockée : tout est traité à la volée
-
----
+Application web pour convertir vos photos en PDF, directement depuis votre navigateur.
 
 ## ✨ Fonctionnalités
 
-- 📂 Ajout d’images par clic ou glisser-déposer
-- 🔀 Réorganisation de l’ordre des pages
-- 📄 Génération automatique d’un PDF
-- 👀 Aperçu du PDF (desktop)
-- 💾 Téléchargement du PDF
-- 📤 Partage du PDF (mobile compatible)
-- 🌙 Interface moderne en thème sombre
-- 📱 Responsive (PC & mobile)
+- **Import de photos** : glisser-déposer ou sélection de fichiers
+- **Prise de photo** : utilisez directement l'appareil photo de votre téléphone
+- **Édition d'image** : rotation, recadrage, luminosité, contraste
+- **Réorganisation** : glissez les miniatures pour changer l'ordre des pages
+- **Nom personnalisé** : renommez votre PDF avant de le télécharger
+- **100% local** : tout est traité dans votre navigateur, aucune donnée envoyée
 
----
+## 🚀 Installation
 
-## 🛠️ Technologies utilisées
-
-- **Frontend** : React + Vite
-- **Backend** : API Node.js (Vercel Functions)
-- **PDF** : pdf-lib
-- **Upload** : react-dropzone
-- **Déploiement** : Vercel
-
----
-
-## 🚀 Lancer le projet en local
-
-### 1️⃣ Installer les dépendances
 ```bash
 npm install
-```
-
-### 2️⃣ Lancer le frontend
-```bash
 npm run dev
 ```
 
-### 3️⃣ Tester l’API serverless
-```bash
-vercel dev
-```
-
----
-
-## 🌐 Déploiement sur Vercel
+## 📦 Déploiement
 
 ```bash
+npm run build
 vercel --prod
 ```
 
----
+## 🛠️ Technologies
 
-## 📁 Structure du projet
+- React + Vite
+- pdf-lib (génération PDF côté client)
+- pdfjs-dist (aperçu PDF)
+- @dnd-kit (drag & drop)
 
-```
-.
-├── api/
-│   └── pdf.js
-├── src/
-│   ├── components/
-│   ├── services/
-│   ├── App.jsx
-│   └── main.jsx
-├── styles.css
-├── vite.config.js
-├── vercel.json
-└── README.md
-```
+## 📱 Compatibilité
 
----
-
-## 🔐 Confidentialité
-
-- Aucune image stockée
-- Traitement temporaire uniquement
-- Aucun tracking
-
----
+Fonctionne sur desktop et mobile (Chrome, Safari, Firefox, Samsung Internet).
 
 ## 📄 Licence
 
